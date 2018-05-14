@@ -52,8 +52,8 @@ public class SubscribersServlet extends HttpServlet implements ErrorListener {
                 SnmpService snmpService = new SnmpService();
 
                 // Prepare oid
-                String ontStatusOid = switchModel.ontStatusOid() + subscriber.getIndex() + ".1";
-                String ontOpticalPowerOid = switchModel.ontOpticalPowerOid() + subscriber.getIndex();
+                String ontStatusOid = switchModel.ontStatusOid(subscriber.getIndex());
+                String ontOpticalPowerOid = switchModel.ontOpticalPowerOid(subscriber.getIndex());
 
                 List<String> oidList = Arrays.asList(ontStatusOid, ontOpticalPowerOid);
                 ResponseEvent responseEvent = snmpService.get((String) switchIP, oidList);

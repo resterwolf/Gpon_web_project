@@ -14,54 +14,56 @@ public enum SwitchModel {
         }
 
         @Override
-        public String ontStatusOid() {
-            return "1.3.6.1.4.1.2011.6.128.1.1.2.62.1.22";
+        public String ontStatusOid(String index) {
+            return "1.3.6.1.4.1.2011.6.128.1.1.2.62.1.22" + index + ".1";
         }
 
         @Override
-        public String ontOpticalPowerOid() {
-            return "1.3.6.1.4.1.2011.6.128.1.1.2.51.1.6";
-        }
-    },
-
-    ELTEX {
-        @Override
-        public String rowValue() {
-            return "ELTX";
+        public String ontOpticalPowerOid(String index) {
+            return "1.3.6.1.4.1.2011.6.128.1.1.2.51.1.6" + index;
         }
     },
 
-    UNKNOWN_MODEL {
+    UNDEFINED_MODEL {
         @Override
         public String rowValue() {
-            return "Unknown model";
+            return "Undefined model";
+        }
+
+        @Override
+        public String discoveryOid() {
+            return null;
+        }
+
+        @Override
+        public String ontStatusOid(String index) {
+            return null;
+        }
+
+        @Override
+        public String ontOpticalPowerOid(String index) {
+            return null;
         }
     };
 
-    public String rowValue() {
-        return null;
-    }
+    public abstract String rowValue();
 
-    public String discoveryOid() {
-        return null;
-    }
+    public abstract String discoveryOid();
 
-    public String ontStatusOid() {
-        return null;
-    }
+    public abstract String ontStatusOid(String index);
 
-    public String ontOpticalPowerOid() {
-        return null;
-    }
+    public abstract String ontOpticalPowerOid(String index);
 
     public static SwitchModel getModelByString(String string) {
         if (string.equals(HUAWEI_MA5608T.rowValue())) {
             return HUAWEI_MA5608T;
-        } else if (string.equals(ELTEX.rowValue())) {
-            return ELTEX;
         } else {
-            return UNKNOWN_MODEL;
+            return UNDEFINED_MODEL;
         }
+    }
+
+    public static boolean isSupport(String modelStr) {
+        return modelStr.equals(HUAWEI_MA5608T.rowValue());
     }
 
 }

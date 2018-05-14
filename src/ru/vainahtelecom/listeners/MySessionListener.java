@@ -13,18 +13,17 @@ public class MySessionListener implements HttpSessionListener {
 
     public void sessionCreated(HttpSessionEvent se) {
         activeSessions.incrementAndGet();
-        se.getSession().setAttribute("countSession",activeSessions);
+        se.getSession().setAttribute("countSession", activeSessions);
     }
 
     public void sessionDestroyed(HttpSessionEvent se) {
-        if(activeSessions.get() > 0)
+        if (activeSessions.get() > 0)
             activeSessions.decrementAndGet();
-        se.getSession().setAttribute("countSession",activeSessions);
+        se.getSession().setAttribute("countSession", activeSessions);
     }
 
     public static int getActiveSessions() {
         return activeSessions.get();
     }
-
 
 }

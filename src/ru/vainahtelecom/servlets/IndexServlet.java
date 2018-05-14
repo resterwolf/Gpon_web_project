@@ -1,9 +1,11 @@
 package ru.vainahtelecom.servlets;
 
 
+import org.snmp4j.smi.OID;
 import org.snmp4j.smi.VariableBinding;
 import org.snmp4j.util.TreeEvent;
 import ru.vainahtelecom.SNMP.SnmpService;
+import ru.vainahtelecom.config.AppConfig;
 import ru.vainahtelecom.errors.Error;
 import ru.vainahtelecom.errors.ErrorListener;
 import ru.vainahtelecom.model.SwitchModel;
@@ -47,7 +49,7 @@ public class IndexServlet extends HttpServlet implements ErrorListener {
         SwitchModel switchModel = SwitchModel.getModelByString(switchModelString);
 
         // Check model is support
-        if (switchModel == SwitchModel.UNKNOWN_MODEL || switchModel == SwitchModel.ELTEX) {
+        if (switchModel == SwitchModel.UNDEFINED_MODEL) {
             showError(Error.UNSUPPORTED_SWITCH_MODEL, req, resp);
             return;
         }
@@ -68,15 +70,14 @@ public class IndexServlet extends HttpServlet implements ErrorListener {
 
                 String subsName = variableBinding.toValueString();
                 String oid = variableBinding.getOid().toDottedString();
-                String subsIndex = oid.substring(35);
+                String subsIndex = oid.substring(switchModel.discoveryOid().length(), oid.length());
 
                 // Skip this iteration if has filtering by username
                 if (!subscriberNameInputValue.isEmpty() && !subsName.contains(subscriberNameInputValue)) {
                     continue;
                 }
 
-                Subscriber subscriber = new Subscriber(subsName, oid, subsIndex);
-                subscribers.add(subscriber);
+                subscribers.add(new Subscriber(subsName, oid, subsIndex));
             }
         }
 

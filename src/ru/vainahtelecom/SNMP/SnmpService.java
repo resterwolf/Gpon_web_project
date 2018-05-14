@@ -8,6 +8,7 @@ import org.snmp4j.transport.DefaultUdpTransportMapping;
 import org.snmp4j.util.DefaultPDUFactory;
 import org.snmp4j.util.TreeEvent;
 import org.snmp4j.util.TreeUtils;
+import ru.vainahtelecom.config.AppConfig;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.Objects;
 public class SnmpService implements AutoCloseable {
 
     // Public class properties ...
-    public static final String COMMUNITY = "public";
+    public static final String COMMUNITY = AppConfig.getGlobalConfig().getSnmp().getCommunity();
 
     // Private instance properties ...
     private final String SNMP_COMMUNITY;

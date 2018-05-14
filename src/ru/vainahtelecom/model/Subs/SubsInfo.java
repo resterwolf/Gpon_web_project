@@ -54,11 +54,14 @@ public class SubsInfo {
             }
         },
 
-        UNKNOWN;
+        UNKNOWN {
+            @Override
+            public String rowValue() {
+                return "Unknown";
+            }
+        };
 
-        public String rowValue() {
-            return "Unknown";
-        }
+        public abstract String rowValue();
 
         public static OntStatus getOntStatusByString(String status) {
             if (Objects.isNull(status)) {

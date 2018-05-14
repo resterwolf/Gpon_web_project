@@ -8,30 +8,38 @@
         <welcome-file>index</welcome-file>
     </welcome-file-list>
 
-
-
+    <!-- Registration servlets -->
     <servlet>
         <servlet-name>IndexServlet</servlet-name>
         <servlet-class>ru.vainahtelecom.servlets.IndexServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>IndexServlet</servlet-name>
-        <url-pattern>/index</url-pattern>
-    </servlet-mapping>
-
 
     <servlet>
         <servlet-name>SubscribersPage</servlet-name>
         <servlet-class>ru.vainahtelecom.servlets.SubscribersServlet</servlet-class>
     </servlet>
+
+    <!-- Mapping servlets -->
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>SubscribersPage</servlet-name>
         <url-pattern>/subscriber_info</url-pattern>
     </servlet-mapping>
 
+
+    <!-- Registration listeners -->
     <listener>
         <display-name>sessionListener</display-name>
         <listener-class>ru.vainahtelecom.listeners.MySessionListener</listener-class>
+    </listener>
+
+    <listener>
+        <display-name>customServletContextListener</display-name>
+        <listener-class>ru.vainahtelecom.listeners.CustomServletContextListener</listener-class>
     </listener>
 
 </web-app>

@@ -41,10 +41,6 @@
             <option value="HuaweiMA5608T_10.26.76.243">10.26.76.243</option>
             <option value="HuaweiMA5608T_10.26.80.155">10.26.80.155</option>
         </optgroup>
-
-        <optgroup label="ELTX">
-            <option value="ELTX_10.25.7.253">10.25.7.253</option>
-        </optgroup>
     </select>
 
     <p><input type="text" name="subscriber_name_input"></p>
